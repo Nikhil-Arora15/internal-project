@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Leaves Details</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
+	  integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+	.fix-table{
+		white-space: nowrap;
+		overflow:hidden;
+	}
+	.header-shadow{
+	box-shadow:	0px 6px 15px #888888
+	}
+</style>
+
+<body>
+
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark header-shadow">
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/employee}"><i class="fa-solid fa-house"></i></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" th:href="@{/employee}">Internal DashBoard</a>
+				</li>
+			</ul>
+		</div>
+		<!-- Brand -->
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- Navbar links -->
+		
+	</nav>
+	
+	<br>
+	<div class="container-fluid">
+			<p class="text-secondary h4"> Leave Details</p>
+			<br>
+			<div class="row">
+				<div class="col-9">
+					<div class="btn-group">
+
+						
+						<a th:href="@{/leaves/new}" class="btn btn-outline-success btn-sm mb-3 mr-3">Apply For Leave</a>
+						</div>
+						</div>
+						<div class="col-3 text-right">
+				<select name="select1" onchange="javascript:getOption(this.value)"
+					class="form-control w-50 float-right">
+					<option value="Month">Month: [[${month}]]</option>
+					<option value="All">All</option>
+					<option value="January">January</option>
+					<option value="February">February</option>
+					<option value="March">March</option>
+					<option value="April">April</option>
+					<option value="May">May</option>
+					<option value="June">June</option>
+					<option value="July">July</option>
+					<option value="August">August</option>
+					<option value="September">September</option>
+					<option value="October">October</option>
+					<option value="November">November</option>
+					<option value="December">December</option>
+					
+				</select>
+			</div>
+				<div class="col-6 text-right float-right">
+				
+					<p th:inline="text" class="h4 text-secondary">
+						Total Leaves: [[${sumleaves}]] [[${sumleave}]]
+					</p>
+				
+				<!--<div class="row">
+					<div class="col-lg-3">
+
+						<!--<a th:href = "@{/students/new}" class= "btn btn-primary btn-sm mb-3">Add Student</a>-->
+
+				<!--</div>
+		
+				</div>-->
+			</div>
+			</div>
+			<br>
+				<table class="table  table-striped table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th>Employee ID</th>
+							<th>Employee Name</th>
+							<th>Month</th>
+							<th>Start Date</th>
+							<th>End Date</th>
+							<th>Days</th>
+							<th>Status</th>
+							<th>Reason</th>
+							<th colspan="2">Action</th>
+						</tr>
+					</thead>
+					</tbody>
+
+
+					<tr th:each="leaves : ${leaves}">
+						<!--<td th:text="${leaves.emp_name"></td>-->
+						<td th:text="${leaves.emp_id}"></td>
+						<td th:text="${leaves.emp_name}"></td>
+						<td th:text="${leaves.month}"></td>
+						<td th:text="${#dates.format(leaves.start_date,'dd-MM-yyyy')}"></td>
+						<td th:text="${#dates.format(leaves.end_date,'dd-MM-yyyy')}"></td>
+						<td th:text="${leaves.no_days}"></td>
+						<td th:text="${leaves.status}"></td>
+						<td th:text="${leaves.reason}"></td>
+						<td><a th:href="@{/leaves/edit/{id}(id=${leaves.id})}" class="btn btn-outline-success"><i class="fa-solid fa-pencil"></a></td>
+						<!--<td th:text="${#dates.monthName(leaves.start_date)}"></td>-->
+						<td><a th:href="@{/leaves/{id}(id=${leaves.id})}" class="btn btn-outline-danger"><i
+								class="fa-regular fa-trash-can"></i></a></td>
+					</td>
+						
+
+					</tr>
+				</table>
+			</div>
+			
+			<script type="text/javascript">
+		function getOption(month) {
+			//selectElement = document.querySelector('#select1');
+			// output = selectElement.value;
+			//document.querySelector('.output').textContent = output;
+			window.location = "http://localhost:8080/leaves/month/" + month;
+
+		}
+	</script>
+
+</body>
+
+</html>

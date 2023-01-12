@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Monthly Contribution Details</title>
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<style>
+    .fix-table{
+        white-space: nowrap;
+        overflow:hidden;
+    }
+    .header-shadow{
+    box-shadow:    0px 6px 15px #888888
+    }
+</style>
+
+
+<body>
+
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark header-shadow">
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/employee}"><i class="fa-solid fa-house"></i>&nbsp&nbsp</a>
+					
+				</li>
+			</ul>
+		
+		<br>
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Monthly Contribution Details</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		
+	</nav>
+	</div>
+	<br>
+
+	<div class="container-fluid">
+		<p class="text-secondary h4"> Monthly Contribution and Expenditure</p>
+
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="btn-group">
+
+						<a th:href="@{/employee/contri/add}" class="btn btn-outline-success btn-sm mb-3 mr-3"><i class="fa-solid fa-plus "></i> Monthly Expenditure</a>
+						&nbsp
+					<!--	<a th:href="@{/employee/contri/amount}" class="btn btn-primary btn-sm mb-3">Add Contribution</a>
+						&nbsp&nbsp&nbsp&nbsp -->
+						<a th:href="@{/employee/contri/amount/view}" class="btn btn-outline-success btn-sm mb-3 mr-3"><i class="fa-solid fa-eye "></i>  Contributed Amount</a>
+
+
+					</div>
+
+				</div>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp 
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<span style="float: right;color: rgb(128, 128, 128);">
+<h3 th:inline="text" >
+  Total Remaining Balance:[[${sumrem}]]
+</h3>
+</span>
+				<!--<div class="row">
+					<div class="col-lg-3">
+
+						<!--<a th:href = "@{/students/new}" class= "btn btn-primary btn-sm mb-3">Add Student</a>-->
+
+					<!--</div>
+
+				</div>-->
+				
+				<div class="col-4 text-left">
+				<select name="select1" onchange="javascript:getOption(this.value)"
+					class="form-control w-50 float-left">
+					<option value="Select Year">Select Year : [[${y}]]</option>
+					
+					<option value = "2022">2022</option>
+					<option value = "2023">2023</option>
+					<option value = "2024">2024</option>
+					
+				
+					
+				</select>
+				</div>
+		</div>
+		<br>
+<div style="overflow-x:auto;">
+				<table class="table table-striped table-bordered table-sm">
+<thead class="table-dark">
+<tr class="fix-table">
+							<!--<th>Year</th>-->
+							<th>Month</th>
+							<th>Monthly Contribution Amount</th>
+							<th>Expenditure</th>
+							<th>Remaining Amount</th>
+							<th>Notes</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					</tbody>
+				
+
+				<!--	<tr th:each="expense : ${expense}">-->
+				<tr th:each="expense, iterStat : ${expense}">
+				<!--<td th:text="${expense.year}"></td>-->
+						<td th:text="${expense.months}"></td>
+						<td th:text="${expense.total_contri_amount}"></td>
+						<td th:text="${expense.expenditure}"></td>
+						<td th:text="${expense.remaining_amount}"></td>
+						<td th:text="${expense.notes}"></td>
+						<td><a th:href="@{/employee/contri/{id}(id=${expense.id})}" class="btn btn-outline-success"><i class="fa-solid fa-pencil"></i></a></td>
+						
+						<!--
+						
+						
+						
+						
+						
+						edit here
+						
+						
+						
+						
+						
+				
+						
+						
+						
+						-->
+					</tr>
+				
+				</table>
+				<script type="text/javascript">
+				function getOption(year) {
+					//selectElement = document.querySelector('#select1');
+					// output = selectElement.value;
+					//document.querySelector('.output').textContent = output;
+					window.location = "http://localhost:8080/employee/contri/year/"+year;
+
+
+
+				}
+			</script>
+			
+</body>
+
+</html>
+
